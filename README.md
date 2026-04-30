@@ -83,42 +83,44 @@ pixelnarrate/
 └── README.md
 ```
 
-# =============================================================================
-# Image Captioning with Xception + LSTM / GRU / Attention
-# =============================================================================
-# This notebook implements and evaluates multiple deep learning approaches
-# for automatic image caption generation.
-#
-# 🔹 Key Components:
-# - Visual Feature Extraction using pretrained Xception CNN
-# - Text Processing using tokenization and sequence padding
-# - Sequence Modeling using:
-#     • LSTM (baseline model)
-#     • GRU variants
-#     • Attention-based architectures
-#
-# 🔹 Experiments:
-# - Multiple configurations of embedding size, RNN units, dropout, and learning rate
-# - Comparison between different architectures (LSTM, GRU, Attention)
-#
-# 🔹 Training:
-# - Data generators for efficient memory usage
-# - Early stopping, learning rate scheduling, and checkpointing
-#
-# 🔹 Evaluation Metrics:
-# - BLEU-1, BLEU-4
-# - ROUGE-L
-#
-# 🔹 Outputs:
-# - Trained models (.keras / .h5)
-# - Training history logs
-# - Evaluation results saved as CSV
-#
-# 🔹 Goal:
-# To analyze model performance and understand strengths/weaknesses
-# of different captioning approaches.
-#
-# =============================================================================
+---
+
+## 📓 Companion Notebook
+
+[`Image_Captioning_Xception_Experiments.ipynb`](./Image_Captioning_Xception_Experiments.ipynb) presents the complete pipeline for building and evaluating an image captioning system using deep learning. It compares three architectures (LSTM baseline, GRU, and attention‑based models) on top of Xception CNN features.
+
+### 🔬 Key Steps
+
+- Image preprocessing (Xception‑compatible 299×299 resizing)
+- Text tokenization and sequence padding
+- Feature extraction using a frozen pretrained Xception (2048‑dim vectors)
+- Training of three models: LSTM (baseline), GRU, and Bahdanau attention
+- Evaluation using **BLEU-1/2/3/4** and **ROUGE-L**
+
+### 📊 Selected Results (BLEU‑4, Flickr8k test set)
+
+| Model | BLEU‑4 |
+|-------|--------|
+| Baseline LSTM | 16.10 |
+| GRU + Attention | 15.82 |
+| Fine‑tuned Xception + Attention* | 12.62 |
+
+> *Limited to 5 epochs → under‑trained. The notebook discusses how longer training stabilises attention and improves performance.
+
+### ⚠️ Error Analysis
+
+The notebook documents common failure modes:
+
+- Missing objects (e.g., “ball” omitted from a football scene)
+- Generic or repetitive captions (“a person is standing” repeated)
+- Incorrect object relationships or attributes (wrong colour, size, or action)
+
+### 🎯 Outcome
+
+Among the three architectures, **attention‑based models produce the most accurate and descriptive captions** when adequately trained. The notebook provides a full comparison of trade‑offs between BLEU (exact n‑gram overlap) and ROUGE (semantic similarity).
+
+
+---
 
 
 ### Required files
